@@ -6,7 +6,7 @@
 /*   By: hbinti-d <hbinti-d@student.42iskandar      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 20:30:27 by hbinti-d          #+#    #+#             */
-/*   Updated: 2026/02/28 12:44:00 by hbinti-d         ###   ########.fr       */
+/*   Updated: 2026/02/28 15:40:37 by hbinti-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,16 @@ void	move_to_top(t_stack *a, int min, int max)
 {
 	int	i;
 	int	index[2];
+	int	dist_bottom;
+	int	dist_top;
 
 	index[0] = find_from_top(a, min, max);
 	index[1] = find_from_bottom(a, min, max);
-	if (index[0] < a->top - index[1])
+
+	dist_bottom = index[0] + 1;
+	dist_top = a->top - index[1];
+
+	if (dist_bottom < dist_top)
 		i = index[0];
 	else
 		i = index[1];
@@ -63,10 +69,23 @@ void	move_min_or_max_to_top(t_stack *b)
 {
 	int	i;
 	int	index[2];
+	int	dist_min;
+	int	dist_max;
 
 	index[0] = _index(b, min(b));
 	index[1] = _index(b, max(b));
-	if (index[0] < b->top - index[1])
+	
+	if (index[0] < b->top / 2)
+		dist_min = index[0] + 1;
+	else
+		dist_min = b->top - index[0];
+	
+	if (index[1] < b->top / 2)
+		dist_max = index[1] + 1;
+	else
+		dist_max = b->top - index[1];
+
+	if (dist_min < dist_max)
 		i = index[0];
 	else
 		i = index[1];

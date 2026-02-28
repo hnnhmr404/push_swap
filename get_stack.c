@@ -6,7 +6,7 @@
 /*   By: hbinti-d <hbinti-d@student.42iskandar      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 11:45:28 by hbinti-d          #+#    #+#             */
-/*   Updated: 2026/02/28 11:48:23 by hbinti-d         ###   ########.fr       */
+/*   Updated: 2026/02/28 16:00:37 by hbinti-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,20 @@
 
 static bool	validate_int(char *elem)
 {
-	bool			is_int;
 	unsigned int	i;
-	unsigned int	cm;
 
 	i = 0;
-	cm = 0;
-	is_int = true;
-	while (elem[i] && is_int)
+	if (elem[i] == '-' || elem[i] == '+')
+		i++;
+	if (!elem[i])
+		return (true);
+	while (elem[i])
 	{
-		if (elem[i] == '-' && cm < 1)
-			cm++;
-		else if (!ft_isdigit(elem[i]))
-			is_int = false;
+		if (!ft_isdigit(elem[i]))
+			return (true);
 		i++;
 	}
-	return (!is_int);
+	return (false);
 }
 
 void	insert_sorted(int n, int *data, int size)
@@ -66,6 +64,12 @@ static int	fill_element(t_stack *stack, char *arg)
 	j = 0;
 	status = 0;
 	array = ft_split(arg, SPACE);
+	if (!array || !array[0])
+	{
+		if (array)
+			message_and_exit(stack, NULL, status);
+		return (1);
+	}
 	while (array[j] && !status)
 	{
 		if (validate_int(array[j]))
