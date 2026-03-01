@@ -6,7 +6,7 @@
 /*   By: hbinti-d <hbinti-d@student.42iskandar      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 19:12:22 by hbinti-d          #+#    #+#             */
-/*   Updated: 2026/02/18 12:00:17 by hbinti-d         ###   ########.fr       */
+/*   Updated: 2026/03/01 13:19:07 by hbinti-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,32 @@ t_stack	*initialize(unsigned int size)
 	return (stack);
 }
 
-int min(t_stack *stack)
+int	min(t_stack *stack)
 {
-	int i;
-	int m;
-	
+	int	i;
+	int	m;
+
 	i = 0;
 	m = stack->array[0];
 	while (++i <= stack->top)
+	{
 		if (stack->array[i] < m)
 			m = stack->array[i];
+	}
 	return (m);
 }
 
-int max(t_stack *stack)
+int	max(t_stack *stack)
 {
-	int i = 0;
-	int m = stack->array[0];
-	
+	int	i;
+	int	m;
+
+	i = 0;
+	m = stack->array[0];
 	while (++i <= stack->top)
+	{
 		if (stack->array[i] > m)
 			m = stack->array[i];
+	}
 	return (m);
 }
-

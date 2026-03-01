@@ -6,7 +6,7 @@
 /*   By: hbinti-d <hbinti-d@student.42iskandar      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 19:12:41 by hbinti-d          #+#    #+#             */
-/*   Updated: 2026/02/28 12:21:03 by hbinti-d         ###   ########.fr       */
+/*   Updated: 2026/03/01 13:06:15 by hbinti-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	push(t_stack *from, t_stack *to)
 {
-		if (from->top == -1)
+	if (from->top == -1)
 		return ;
 	to->array[++to->top] = from->array[from->top--];
 }

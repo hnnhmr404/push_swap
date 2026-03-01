@@ -6,7 +6,7 @@
 /*   By: hbinti-d <hbinti-d@student.42iskandar      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/18 11:45:28 by hbinti-d          #+#    #+#             */
-/*   Updated: 2026/02/28 16:00:37 by hbinti-d         ###   ########.fr       */
+/*   Updated: 2026/03/01 13:27:24 by hbinti-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,32 +58,29 @@ static int	fill_element(t_stack *stack, char *arg)
 {
 	unsigned int	j;
 	int				n;
-	int				status;
 	char			**array;
 
 	j = 0;
-	status = 0;
 	array = ft_split(arg, SPACE);
 	if (!array || !array[0])
 	{
 		if (array)
-			message_and_exit(stack, NULL, status);
+			message_and_exit(stack, NULL, 0);
 		return (1);
 	}
-	while (array[j] && !status)
+	while (array[j])
 	{
 		if (validate_int(array[j]))
-			status = 1;
+			return (free_array((void **)array), 1);
 		if (atoiv(array[j], &n))
-			status = 2;
+			return (free_array((void **)array), 2);
 		if (already_exists(n, stack))
-			status = 3;
-		else
-			stack->array[++stack->top] = n;
+			return (free_array((void **)array), 3);
+		stack->array[++stack->top] = n;
 		j++;
 	}
 	free_array((void **)array);
-	return (status);
+	return (0);
 }
 
 t_stack	*get_stack(int size, char **args)
